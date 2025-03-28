@@ -1,17 +1,16 @@
+// lib/useLocale.ts
 import { useEffect, useState } from "react";
 
-export const useLocale = (locale: string) => {
+export function useLocale(locale: string | null) {
   const [messages, setMessages] = useState<Record<string, string> | null>(null);
 
   useEffect(() => {
+    if (!locale) return; // <- don't fetch until we have a locale
     fetch(`/locales/${locale}.json`)
       .then((res) => res.json())
-      .then((data) => setMessages(data))
-      .catch(() => {
-        console.error(`Could not load locale: ${locale}`);
-        setMessages({});
-      });
+      .then(setMessages)
+      .catch(() => setMessages(null));
   }, [locale]);
 
   return messages;
-};
+}

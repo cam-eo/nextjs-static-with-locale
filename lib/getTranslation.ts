@@ -3,7 +3,7 @@ export async function getTranslation(locale: string) {
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_BASE_URL}/locales/${locale}.json`,
     {
-      next: { revalidate: 0 }, // disable cache if you want instant update when file changes
+      // next: { revalidate: 0 }, // disable cache if you want instant update when file changes
     }
   );
 

@@ -1,18 +1,18 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
-import "./globals.css";
-import { getTranslation } from "@/lib/getTranslation";
-import { TranslationProvider } from "../../providers/TranslationContext";
+// import { Geist, Geist_Mono } from "next/font/google";
+// import "./globals.css";
+// import { getTranslation } from "@/lib/getTranslation";
+// import { TranslationProvider } from "../../providers/TranslationContext";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
+// const geistSans = Geist({
+//   variable: "--font-geist-sans",
+//   subsets: ["latin"],
+// });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
+// const geistMono = Geist_Mono({
+//   variable: "--font-geist-mono",
+//   subsets: ["latin"],
+// });
 
 export const metadata: Metadata = {
   title: "Divorce test",
@@ -25,30 +25,35 @@ export async function generateStaticParams() {
 
 export default async function RootLayout({
   children,
-  params: { lang },
+  params,
 }: Readonly<{
   children: React.ReactNode;
-  params: { lang: string };
+  params: Promise<{ lang: string }>;
 }>) {
-  console.log({ lang: lang });
+  const { lang } = await params;
+
   if (!lang) {
     return (
       <html lang={lang}>
-        <body className={`${geistSans.variable} ${geistMono.variable}`}>
+        <body
+        // className={`${geistSans.variable} ${geistMono.variable}`}
+        >
           <p>NO LANG</p>
         </body>
       </html>
     );
   }
 
-  const translations = await getTranslation(lang);
+  // const translations = await getTranslation(lang);
 
   return (
     <html lang={lang}>
-      <body className={`${geistSans.variable} ${geistMono.variable}`}>
-        <TranslationProvider translations={translations}>
-          {children}
-        </TranslationProvider>
+      <body
+      // className={`${geistSans.variable} ${geistMono.variable}`}
+      >
+        {/* <TranslationProvider translations={translations}> */}
+        {children}
+        {/* </TranslationProvider> */}
       </body>
     </html>
   );
