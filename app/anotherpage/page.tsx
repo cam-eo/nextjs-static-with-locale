@@ -10,13 +10,11 @@ export default function Home() {
   const params = new URLSearchParams(location.search);
 
   return (
-    <div>
-      <Center as="main" flexDirection="column" pt="20">
-        <Button onClick={() => navigate(`/?${params.toString()}`)} mb="5">
-          back
-        </Button>
-        <h1>Another NextJS Route</h1>
-      </Center>
-    </div>
+    <Center as="main" flexDirection="column" pt="20">
+      <Button onClick={() => navigate(`/?${params.toString()}`)} mb="5">
+        back
+      </Button>
+      <h1>Another NextJS Route</h1>
+    </Center>
   );
 }

@@ -24,8 +24,8 @@ export default function Home({ data }) {
       <Center as="main" w="full" flexDirection="column" pt="20">
         <Text>Name: {data?.name}</Text>
         <Button
-          onClick={() => navigate(`anotherpage/?${params.toString()}`)}
           mb="5"
+          onClick={() => navigate(`anotherpage/?${params.toString()}`)}
         >
           to another page
         </Button>
