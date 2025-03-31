@@ -1,14 +1,14 @@
-import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 
 export function useLocale(locale: string | null) {
-  const searchParams = useSearchParams();
+  const location = useLocation();
+
+  const params = new URLSearchParams(location.search);
 
   const [messages, setMessages] = useState<Record<string, string> | null>(null);
 
-  // const params = new URLSearchParams(searchParams.toString());
-
-  const exteralLocalePath = searchParams.get("localePath");
+  const exteralLocalePath = params.get("localePath");
   const fetchPath = `${
     exteralLocalePath ? `${exteralLocalePath}/public` : ""
   }/locales/${locale}.json`;

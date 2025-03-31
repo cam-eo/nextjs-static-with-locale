@@ -1,18 +1,18 @@
 "use client";
 import { Button, Center } from "@chakra-ui/react";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useNavigate, useLocation } from "react-router-dom";
 
 export default function Home() {
-  const searchParams = useSearchParams();
-  const router = useRouter();
+  const navigate = useNavigate();
+  const location = useLocation();
 
   // preserve locale from external source
-  const params = new URLSearchParams(searchParams.toString());
+  const params = new URLSearchParams(location.search);
 
   return (
     <div>
       <Center as="main" flexDirection="column" pt="20">
-        <Button onClick={() => router.push(`/?${params.toString()}`)} mb="5">
+        <Button onClick={() => navigate(`/?${params.toString()}`)} mb="5">
           back
         </Button>
         <h1>Another NextJS Route</h1>
