@@ -9,11 +9,7 @@ export function useLocale(locale: string | null) {
   const [messages, setMessages] = useState<Record<string, string> | null>(null);
 
   const exteralLocalePath = params.get("localePath");
-  const fetchPath = `${
-    exteralLocalePath ? `${exteralLocalePath}/public` : ""
-  }/locales/${locale}.json`;
-
-  console.log({ locale, exteralLocalePath, fetchPath });
+  const fetchPath = `public/locales/${locale}.json`;
 
   useEffect(() => {
     if (!locale) return; // <- don't fetch until we have a locale
