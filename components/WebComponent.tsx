@@ -1,11 +1,11 @@
-import React from "react";
-import ReactDOM from "react-dom/client"; // Ensure ReactDOM is imported
-import App from "../app/page"; // Import your main Next.js component
+import React, { Suspense, lazy } from "react";
+import ReactDOM from "react-dom/client";
 import { HashRouter as Router, Routes, Route } from "react-router-dom";
-import AnotherPage from "../app/anotherpage/page"; // Import your main Next.js component
 import { ChakraProvider } from "@chakra-ui/react";
 
-// Define the structure of the locale object (assuming it has a greeting key, you can expand as needed)
+// Lazy load components
+const AnotherPage = lazy(() => import("../app/anotherpage/page"));
+const App = lazy(() => import("../app/page"));
 
 class WebComponent extends HTMLElement {
   private mountPoint: HTMLElement | null = null;
@@ -30,13 +30,15 @@ class WebComponent extends HTMLElement {
   // Render the React app with the current locale data and passed 'data' attribute
   renderComponent() {
     ReactDOM.createRoot(this.mountPoint!).render(
-      <ChakraProvider>
-        <Router>
-          <Routes>
-            <Route path="/" element={<App data={this.data} />} />
-            <Route path="/anotherpage" element={<AnotherPage />} />
-          </Routes>
-        </Router>
+      <ChakraProvider resetCSS>
+        <Suspense fallback={<div>Loading...</div>}>
+          <Router>
+            <Routes>
+              <Route path="/" element={<App data={this.data} />} />
+              <Route path="/anotherpage" element={<AnotherPage />} />
+            </Routes>
+          </Router>
+        </Suspense>
       </ChakraProvider>
     );
   }

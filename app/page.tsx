@@ -20,26 +20,21 @@ export default function Home({ data }) {
   const t = useLocale(lang as string);
 
   return (
-    <div>
-      <Center as="main" w="full" flexDirection="column" pt="20">
-        <Text>Name: {data?.name}</Text>
-        <Button
-          mb="5"
-          onClick={() => navigate(`anotherpage/?${params.toString()}`)}
-        >
-          to another page
+    <Center as="main" w="full" flexDirection="column" pt="20">
+      <Text>Name: {data?.name}</Text>
+      <Button
+        mb="5"
+        onClick={() => navigate(`anotherpage/?${params.toString()}`)}
+      >
+        to another page
+      </Button>
+      <Flex mb="5" gap="1">
+        <Button onClick={() => changeLang("en")}>en</Button>
+        <Button backgroundColor={data?.color} onClick={() => changeLang("nl")}>
+          nl
         </Button>
-        <Flex mb="5" gap="1">
-          <Button onClick={() => changeLang("en")}>en</Button>
-          <Button
-            backgroundColor={data?.color}
-            onClick={() => changeLang("nl")}
-          >
-            nl
-          </Button>
-        </Flex>
-        <Text fontSize="xl">{t?.title}</Text>
-      </Center>
-    </div>
+      </Flex>
+      <Text fontSize="xl">{t?.title}</Text>
+    </Center>
   );
 }
