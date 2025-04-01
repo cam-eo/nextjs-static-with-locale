@@ -1,7 +1,7 @@
 "use client";
 import { Button, Center, Flex, Text } from "@chakra-ui/react";
-import { useLocale } from "./useLocale";
 import { useNavigate, useLocation } from "react-router-dom";
+import { type Locales, useLocaleStore } from "../store";
 
 // @ts-expect-error - fix later
 export default function Home({ data }) {
@@ -17,7 +17,7 @@ export default function Home({ data }) {
 
   const lang = params.get("lang");
 
-  const t = useLocale(lang as string);
+  const t = useLocaleStore((state) => state.locales[lang as keyof Locales]);
 
   return (
     <Center as="main" w="full" flexDirection="column" pt="20">
