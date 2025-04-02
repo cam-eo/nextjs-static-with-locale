@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- <link rel="stylesheet" href="styles.css" /> -->
+    <meta charset="UTF-8" />
+    <title>Parent App</title>
+    <head>
+      <script type="module" src="dist/my-web-component.umd.js"></script>
+    </head>
+  </head>
+  <body style="background-color: #00000080; color: rgb(216, 216, 216)">
+    <h1>Parent App:</h1>
+    <my-web-component id="myComponent" class="whatever"></my-web-component>
+
+    <script>
+      const locales = {
+        nl: {
+          title: "Hoi",
+        },
+      };
+
+      const theme = {
+        components: {
+          Button: {
+            baseStyle: {
+              backgroundColor: "#654321", // Overrides the default blue button color
+            },
+          },
+        },
+      };
+
+      const jsonObject = {
+        name: "Test",
+        theme: theme,
+        locales,
+      };
+      const myComponent = document.getElementById("myComponent");
+      myComponent.setAttribute("data", JSON.stringify(jsonObject));
+    </script>
+  </body>
+</html>

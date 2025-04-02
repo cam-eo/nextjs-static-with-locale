@@ -1,0 +1,8 @@
+.whatever {
+  button {
+    background-color: green;
+  }
+  main > p {
+    color: red;
+  }
+}

@@ -1,12 +1,6 @@
-import React, { Suspense, lazy } from "react";
+import React from "react";
 import ReactDOM from "react-dom/client"; // Ensure ReactDOM is imported
-import { HashRouter as Router, Routes, Route } from "react-router-dom";
-import { ChakraProvider } from "@chakra-ui/react";
-import { LocaleSync } from "../locales";
-
-// Lazy load components
-const AnotherPage = lazy(() => import("../app/anotherpage/page"));
-const App = lazy(() => import("../app/page"));
+import Root from "../app/App";
 
 class WebComponent extends HTMLElement {
   private mountPoint: HTMLElement | null = null;
@@ -30,19 +24,7 @@ class WebComponent extends HTMLElement {
 
   // Everything here can move into the Root component i.e. App
   renderComponent() {
-    ReactDOM.createRoot(this.mountPoint!).render(
-      <ChakraProvider resetCSS>
-        <LocaleSync />
-        <Suspense fallback={<div>Loading...</div>}>
-          <Router>
-            <Routes>
-              <Route path="/" element={<App data={this.data} />} />
-              <Route path="/anotherpage" element={<AnotherPage />} />
-            </Routes>
-          </Router>
-        </Suspense>
-      </ChakraProvider>
-    );
+    ReactDOM.createRoot(this.mountPoint!).render(<Root data={this.data} />);
   }
 }
 
